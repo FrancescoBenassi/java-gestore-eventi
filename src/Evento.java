@@ -1,18 +1,19 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Evento {
 
-    private String titolo;
+    private String title;
     private Date date;
     private int totalSeats;
     private int reservedSeats;
     private Date dateToday;
 
-    public Evento(String titolo, Date date, int totalSeats) {
+    public Evento(String title, Date date, int totalSeats) {
         long today = System.currentTimeMillis();
         this.dateToday = new Date(today);
         if (this.dateToday.before(date) && totalSeats > 0) {
-            this.titolo = titolo;
+            this.title = title;
             this.totalSeats = totalSeats;
             this.reservedSeats = 0;
             this.date = date;
@@ -26,12 +27,12 @@ public class Evento {
 
     }
 
-    public String getTitolo() {
-        return this.titolo;
+    public String getTitle() {
+        return this.title;
     }
 
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Date getDate() {
@@ -65,6 +66,13 @@ public class Evento {
         } else{
             System.out.println("Non è stato possibile rimuovere un posto, l'evento è già passato");
         }
+    }
+
+    @Override
+    public String toString(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = simpleDateFormat.format(this.date);
+        return dateString + " - " + this.title;
     }
 
 }
