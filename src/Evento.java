@@ -15,9 +15,9 @@ public class Evento {
             this.totalSeats = totalSeats;
             this.reservedSeats = 0;
             this.date = date;
-        } else if(totalSeats > 0){
+        } else if (totalSeats > 0) {
             System.out.println("La data inserita è già passata, riprova");
-        } else if(dateToday.before(date)){
+        } else if (dateToday.before(date)) {
             System.out.println("Il numero totale di posti è inferiore ad 1, riprova");
         } else {
             System.out.println("La data inserita è già passata e il numero totale di posti è inferiore ad 1, riprova");
@@ -25,31 +25,34 @@ public class Evento {
 
     }
 
-    public String getTitolo(){
+    public String getTitolo() {
         return titolo;
     }
 
-    public void setTitolo(String titolo){
+    public void setTitolo(String titolo) {
         this.titolo = titolo;
     }
 
-    public Date getDate(){
+    public Date getDate() {
         return this.date;
     }
 
-    public int getTotalSeats(){
+    public int getTotalSeats() {
         return this.totalSeats;
     }
 
-    public int getReservedSeats(){
+    public int getReservedSeats() {
         return this.reservedSeats;
     }
 
-    public int addReservedSeats(){
-        if(this.totalSeats > this.reservedSeats){
-        return this.reservedSeats++;
+    public void addReservedSeats() {
+        long today = System.currentTimeMillis();
+        Date dateToday = new Date(today);
+        if (this.totalSeats > this.reservedSeats && dateToday.before(date)) {
+            this.reservedSeats++;
+        } else {
+            System.out.println("Non è stato possibile inserire una data, riprova");
         }
-        return this.reservedSeats;
     }
 
 }
