@@ -45,4 +45,11 @@ public class Evento {
         return this.reservedSeats;
     }
 
+    public int addReservedSeats(){
+        if(this.totalSeats > this.reservedSeats){
+        return this.reservedSeats++;
+        }
+        return this.reservedSeats;
+    }
+
 }
