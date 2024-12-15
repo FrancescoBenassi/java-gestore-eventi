@@ -32,4 +32,17 @@ public class Evento {
     public void setTitolo(String titolo){
         this.titolo = titolo;
     }
+
+    public Date getDate(){
+        return this.date;
+    }
+
+    public int getTotalSeats(){
+        return this.totalSeats;
+    }
+
+    public int getReservedSeats(){
+        return this.reservedSeats;
+    }
+
 }
