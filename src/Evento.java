@@ -6,18 +6,19 @@ public class Evento {
     private Date date;
     private int totalSeats;
     private int reservedSeats;
+    private Date dateToday;
 
     public Evento(String titolo, Date date, int totalSeats) {
         long today = System.currentTimeMillis();
-        Date dateToday = new Date(today);
-        if (dateToday.before(date) && totalSeats > 0) {
+        this.dateToday = new Date(today);
+        if (this.dateToday.before(date) && totalSeats > 0) {
             this.titolo = titolo;
             this.totalSeats = totalSeats;
             this.reservedSeats = 0;
             this.date = date;
         } else if (totalSeats > 0) {
             System.out.println("La data inserita è già passata, riprova");
-        } else if (dateToday.before(date)) {
+        } else if (this.dateToday.before(date)) {
             System.out.println("Il numero totale di posti è inferiore ad 1, riprova");
         } else {
             System.out.println("La data inserita è già passata e il numero totale di posti è inferiore ad 1, riprova");
@@ -26,7 +27,7 @@ public class Evento {
     }
 
     public String getTitolo() {
-        return titolo;
+        return this.titolo;
     }
 
     public void setTitolo(String titolo) {
@@ -46,9 +47,7 @@ public class Evento {
     }
 
     public void addReservedSeat() {
-        long today = System.currentTimeMillis();
-        Date dateToday = new Date(today);
-        if (this.totalSeats > this.reservedSeats && dateToday.before(date)) {
+        if (this.totalSeats > this.reservedSeats && this.dateToday.before(this.date)) {
             this.reservedSeats++;
         } else if (this.totalSeats > this.reservedSeats){
             System.out.println("Non è stato possibile aggiungere un posto, non ci sono più posti disponibili");
@@ -59,9 +58,7 @@ public class Evento {
     }
 
     public void removeReservedSeat() {
-        long today = System.currentTimeMillis();
-        Date dateToday = new Date(today);
-        if (this.reservedSeats > 0 && dateToday.before(date)) {
+        if (this.reservedSeats > 0 && this.dateToday.before(this.date)) {
             this.reservedSeats--;
         } else if (this.reservedSeats > 0){
             System.out.println("Non è stato possibile rimuovere un posto, non ci sono più posti da rimuovere");
