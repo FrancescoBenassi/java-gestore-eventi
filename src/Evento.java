@@ -45,13 +45,28 @@ public class Evento {
         return this.reservedSeats;
     }
 
-    public void addReservedSeats() {
+    public void addReservedSeat() {
         long today = System.currentTimeMillis();
         Date dateToday = new Date(today);
         if (this.totalSeats > this.reservedSeats && dateToday.before(date)) {
             this.reservedSeats++;
-        } else {
-            System.out.println("Non è stato possibile inserire una data, riprova");
+        } else if (this.totalSeats > this.reservedSeats){
+            System.out.println("Non è stato possibile aggiungere un posto, non ci sono più posti disponibili");
+        }
+        else {
+            System.out.println("Non è stato possibile aggiungere un posto, l'evento è già passato");
+        }
+    }
+
+    public void removeReservedSeat() {
+        long today = System.currentTimeMillis();
+        Date dateToday = new Date(today);
+        if (this.reservedSeats > 0 && dateToday.before(date)) {
+            this.reservedSeats--;
+        } else if (this.reservedSeats > 0){
+            System.out.println("Non è stato possibile rimuovere un posto, non ci sono più posti da rimuovere");
+        } else{
+            System.out.println("Non è stato possibile rimuovere un posto, l'evento è già passato");
         }
     }
 
