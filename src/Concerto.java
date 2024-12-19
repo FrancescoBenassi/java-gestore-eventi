@@ -17,7 +17,11 @@ public class Concerto extends Evento {
     }
 
     public void setTime(int hours, int minutes) {
+        if(hours >= 0 && hours < 12 && minutes >= 0 && minutes < 60){
         this.time = LocalTime.of(hours, minutes);
+        } else { 
+            System.out.println("I dati inseriti non sono corretti per cambiare l'orario");
+        }
     }
 
     public double getPrice() {
@@ -25,7 +29,11 @@ public class Concerto extends Evento {
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        if(price > 0){
+            this.price = price;
+        } else {
+            System.out.println("Il prezzo inserito è inferiore a 0");
+        }
     }
 
     @Override
@@ -35,7 +43,7 @@ public class Concerto extends Evento {
         DecimalFormat twoPlaces = new DecimalFormat("0.00€");
         String dateString = super.getDate().format(yearMonthDay);
         String timeString = this.time.format(hoursMinutes);
-        String priceFormat = twoPlaces.format(this.price);
-        return dateString + " " + timeString + " - " + super.getTitle() + " - " + priceFormat;
+        String priceString = twoPlaces.format(this.price);
+        return dateString + " " + timeString + " - " + super.getTitle() + " - " + priceString;
     }
 }
