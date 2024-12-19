@@ -51,9 +51,11 @@ public class Evento {
 
     public void addReservedSeat(int numberUserBookings) {
         LocalDate dateToday = LocalDate.now();
-        if (this.totalSeats - this.reservedSeats > numberUserBookings && dateToday.isBefore(this.date)) {
-            this.reservedSeats++;
-        } else if (this.totalSeats - this.reservedSeats < numberUserBookings) {
+        if (this.totalSeats - this.reservedSeats >= numberUserBookings && dateToday.isBefore(this.date)) {
+            for (int i = 0; i < numberUserBookings; i++) {
+                this.reservedSeats++;
+            }
+        } else if (this.totalSeats - this.reservedSeats <= numberUserBookings) {
             System.out.println(
                     "Non è stato possibile aggiungere i posti, il numero di posti prenotati è superiore al numero di posti disponibili");
         } else {
@@ -63,9 +65,11 @@ public class Evento {
 
     public void removeReservedSeat(int numberCancelSeatUser) {
         LocalDate dateToday = LocalDate.now();
-        if (this.reservedSeats > numberCancelSeatUser && dateToday.isBefore(this.date)) {
-            this.reservedSeats--;
-        } else if (this.reservedSeats < numberCancelSeatUser) {
+        if (this.reservedSeats - numberCancelSeatUser >= 0 && dateToday.isBefore(this.date)) {
+            for (int i = 0; i < numberCancelSeatUser; i++) {
+                this.reservedSeats--;
+            }
+        } else if (this.reservedSeats - numberCancelSeatUser <= 0) {
             System.out.println(
                     "Non è stato possibile disdire i posti, i posti disdetti sono maggiori di quelli prenotati");
         } else {
