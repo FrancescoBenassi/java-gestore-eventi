@@ -6,8 +6,14 @@ public class Concerto extends Evento {
     LocalTime time;
     double price;
 
-    public Concerto(String title, int day, int month, int year, int totalSeats, int hours, int minutes, double price) {
+    public Concerto(String title, int day, int month, int year, int totalSeats, int hours, int minutes, double price) throws IllegalArgumentException{
         super(title, day, month, year, totalSeats);
+        if (hours < 0 || hours >= 12 || minutes < 0 || minutes >= 60) {
+            System.out.println("I dati inseriti non sono corretti per cambiare l'orario");
+        }
+        if (price < 0) {
+            throw new IllegalArgumentException("Il prezzo inserito è inferiore a 0");
+        }
         this.time = LocalTime.of(hours, minutes);
         this.price = price;
     }
@@ -17,23 +23,21 @@ public class Concerto extends Evento {
     }
 
     public void setTime(int hours, int minutes) {
-        if(hours >= 0 && hours < 12 && minutes >= 0 && minutes < 60){
-        this.time = LocalTime.of(hours, minutes);
-        } else { 
+        if (hours < 0 || hours >= 12 || minutes < 0 || minutes >= 60) {
             System.out.println("I dati inseriti non sono corretti per cambiare l'orario");
         }
+        this.time = LocalTime.of(hours, minutes);
     }
 
     public double getPrice() {
         return this.price;
     }
 
-    public void setPrice(double price) {
-        if(price > 0){
-            this.price = price;
-        } else {
-            System.out.println("Il prezzo inserito è inferiore a 0");
+    public void setPrice(double price) throws IllegalArgumentException{
+        if (price < 0) {
+            throw new IllegalArgumentException("Il prezzo inserito è inferiore a 0");
         }
+        this.price = price;
     }
 
     @Override
