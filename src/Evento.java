@@ -8,33 +8,35 @@ public class Evento {
     private int totalSeats;
     private int reservedSeats;
 
-    public Evento(String title, int day, int month, int year, int totalSeats) throws IllegalArgumentException {
-        LocalDate dateToday = LocalDate.now();
-        if (day < 0 || day > 31 || month < 0 || month > 12 || year < 0) {
-            throw new IllegalArgumentException("I valori della data inseriti non sono corretti");
+    public Evento(String title, int day, int month, int year, int totalSeats) throws IllegalNumberSeatsException,
+            IllegalDateException, IllegalDateIsBeforeException, IllegalWordException {
+        if (title.length() == 0) {
+            throw new IllegalWordException("Il titolo inserito è vuoto");
         }
+        if (day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0) {
+            throw new IllegalDateException("I valori della data inseriti non sono corretti");
+        }
+        LocalDate dateToday = LocalDate.now();
         this.date = LocalDate.of(year, month, day);
         if (dateToday.isAfter(this.date)) {
-            throw new IllegalArgumentException("La data inserita è già passata, riprova");
+            throw new IllegalDateIsBeforeException("La data inserita è già passata, riprova");
         }
         if (totalSeats < 1) {
-            throw new IllegalArgumentException("Il numero totale di posti è inferiore ad 1, riprova");
-        }
-        if (title.length() == 0) {
-            throw new IllegalArgumentException("Il titolo inserito è vuoto");
+            throw new IllegalNumberSeatsException("Il numero totale di posti è inferiore ad 1, riprova");
         }
         this.title = title;
         this.totalSeats = totalSeats;
         this.reservedSeats = 0;
+
     }
 
     public String getTitle() {
         return this.title;
     }
 
-    public void setTitle(String title) throws IllegalArgumentException {
+    public void setTitle(String title) throws IllegalWordException {
         if (title.length() == 0) {
-            throw new IllegalArgumentException("Il titolo inserito è vuoto");
+            throw new IllegalWordException("Il titolo inserito è vuoto");
         }
         this.title = title;
     }
@@ -43,9 +45,9 @@ public class Evento {
         return this.date;
     }
 
-    public void setDate(int day, int month, int year) throws IllegalArgumentException {
-        if (day > 0 || day <= 31 || month > 0 || month <= 12 || year > 0) {
-            throw new IllegalArgumentException("I valori della data inseriti non sono corretti");
+    public void setDate(int day, int month, int year) throws IllegalDateException {
+        if (day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0) {
+            throw new IllegalDateException("I valori della data inseriti non sono corretti");
         }
         this.date = LocalDate.of(year, month, day);
     }
@@ -58,28 +60,29 @@ public class Evento {
         return this.reservedSeats;
     }
 
-    public void addReservation(int numberUserBookings) throws IllegalArgumentException {
+    public void addReservation(int numberUserBookings) throws IllegalAddReservationException, IllegalDateIsBeforeException{
         LocalDate dateToday = LocalDate.now();
         if (this.totalSeats - this.reservedSeats < numberUserBookings || numberUserBookings < 0) {
-            throw new IllegalArgumentException(
+            throw new IllegalAddReservationException(
                     "Non è stato possibile aggiungere prenotazioni, il dato inserito non è valido");
         }
         if (dateToday.isAfter(this.date)) {
-            throw new IllegalArgumentException("Non è stato possibile aggiungere prenotazioni, l'evento è già passato");
+            throw new IllegalDateIsBeforeException(
+                    "Non è stato possibile aggiungere prenotazioni, l'evento è già passato");
         }
         for (int i = 0; i < numberUserBookings; i++) {
             this.reservedSeats++;
         }
     }
 
-    public void removeReservation(int numberCancelSeatUser) throws IllegalArgumentException {
+    public void removeReservation(int numberCancelSeatUser) throws IllegalRemoveReservationException, IllegalDateIsBeforeException {
         LocalDate dateToday = LocalDate.now();
         if (this.reservedSeats - numberCancelSeatUser < 0 || numberCancelSeatUser < 0) {
-            throw new IllegalArgumentException(
+            throw new IllegalRemoveReservationException(
                     "Non è stato possibile disdire, il dato inserito non è valido");
         }
         if (dateToday.isAfter(this.date)) {
-            throw new IllegalArgumentException("Non è stato possibile disdire, l'evento è già passato");
+            throw new IllegalDateIsBeforeException("Non è stato possibile disdire, l'evento è già passato");
         }
         for (int i = 0; i < numberCancelSeatUser; i++) {
             this.reservedSeats--;
