@@ -6,13 +6,14 @@ public class Concerto extends Evento {
     LocalTime time;
     double price;
 
-    public Concerto(String title, int day, int month, int year, int totalSeats, int hours, int minutes, double price) throws IllegalArgumentException{
+    public Concerto(String title, int day, int month, int year, int totalSeats, int hours, int minutes, double price)
+            throws IllegalValueTimeException, IllegalPriceException {
         super(title, day, month, year, totalSeats);
         if (hours < 0 || hours >= 12 || minutes < 0 || minutes >= 60) {
-            System.out.println("I dati inseriti non sono corretti per cambiare l'orario");
+            throw new IllegalValueTimeException("I dati inseriti non sono corretti per cambiare l'orario");
         }
         if (price < 0) {
-            throw new IllegalArgumentException("Il prezzo inserito è inferiore a 0");
+            throw new IllegalPriceException("Il prezzo inserito è inferiore a 0");
         }
         this.time = LocalTime.of(hours, minutes);
         this.price = price;
@@ -22,9 +23,9 @@ public class Concerto extends Evento {
         return this.time;
     }
 
-    public void setTime(int hours, int minutes) {
+    public void setTime(int hours, int minutes) throws IllegalValueTimeException {
         if (hours < 0 || hours >= 12 || minutes < 0 || minutes >= 60) {
-            System.out.println("I dati inseriti non sono corretti per cambiare l'orario");
+            throw new IllegalValueTimeException("I dati inseriti non sono corretti per cambiare l'orario");
         }
         this.time = LocalTime.of(hours, minutes);
     }
@@ -33,9 +34,9 @@ public class Concerto extends Evento {
         return this.price;
     }
 
-    public void setPrice(double price) throws IllegalArgumentException{
+    public void setPrice(double price) throws IllegalPriceException {
         if (price < 0) {
-            throw new IllegalArgumentException("Il prezzo inserito è inferiore a 0");
+            throw new IllegalPriceException("Il prezzo inserito è inferiore a 0");
         }
         this.price = price;
     }
