@@ -11,7 +11,8 @@ public class Concerto extends Evento {
             throws IllegalPriceException {
         super(title, dateEvent, totalSeats);
         // if (hours < 0 || hours >= 24 || minutes < 0 || minutes >= 60) {
-        //     throw new IllegalValueTimeException("I dati inseriti non sono corretti per inserire l'orario");
+        // throw new IllegalValueTimeException("I dati inseriti non sono corretti per
+        // inserire l'orario");
         // }
         if (price < 0) {
             throw new IllegalPriceException("Il prezzo inserito è inferiore a 0");
@@ -55,7 +56,7 @@ public class Concerto extends Evento {
 
     public static void main(String[] args) {
         try {
-            LocalDate dateEvent = LocalDate.of( 2025,  12,  28);
+            LocalDate dateEvent = LocalDate.of(2025, 12, 28);
             LocalTime timeEvent = LocalTime.of(23, 10);
             Concerto concert = new Concerto("Noemi", dateEvent, 200, timeEvent, 50);
             System.out.println(concert.getPrice());
@@ -64,8 +65,11 @@ public class Concerto extends Evento {
             System.out.println(concert.getTitle());
             System.out.println(concert.getDate());
             System.out.println(concert.getTime());
-            System.out.println(concert.getClass());
             System.out.println(concert.toString());
+        } catch (IllegalPriceException illegalPriceException) {
+            System.out.println("Non si può eseguire hai inserito un numero inferiore a 0");
+        } catch (IllegalValueTimeException illegalValueTimeException) {
+            System.out.println("I dati inseriti per cambiare l'orario non sono validi");
         } catch (Exception e) {
             System.out.println("Hai sbagliato");
         }
