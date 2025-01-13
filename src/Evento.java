@@ -8,16 +8,17 @@ public class Evento {
     private int totalSeats;
     private int reservedSeats;
 
-    public Evento(String title, int day, int month, int year, int totalSeats) throws IllegalNumberSeatsException,
-            IllegalDateException, IllegalDateIsBeforeException, IllegalWordException {
+    public Evento(String title, LocalDate date, int totalSeats) throws IllegalWordException,
+            IllegalDateException, IllegalDateIsBeforeException, IllegalNumberSeatsException {
         if (title.length() == 0) {
             throw new IllegalWordException("Il titolo inserito è vuoto");
         }
-        if (day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0) {
-            throw new IllegalDateException("I valori della data inseriti non sono corretti");
-        }
+        // if (day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0) {
+        //     throw new IllegalDateException("I valori della data inseriti non sono corretti");
+        // }
         LocalDate dateToday = LocalDate.now();
-        this.date = LocalDate.of(year, month, day);
+        // this.date = LocalDate.of(year, month, day);
+        this.date = date;
         if (dateToday.isAfter(this.date)) {
             throw new IllegalDateIsBeforeException("La data inserita è già passata, riprova");
         }
