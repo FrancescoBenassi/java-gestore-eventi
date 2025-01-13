@@ -9,7 +9,7 @@ public class Evento {
     private int reservedSeats;
 
     public Evento(String title, LocalDate date, int totalSeats) throws IllegalWordException,
-            IllegalDateException, IllegalDateIsBeforeException, IllegalNumberSeatsException {
+            IllegalDateIsBeforeException, IllegalNumberSeatsException {
         if (title.length() == 0) {
             throw new IllegalWordException("Il titolo inserito è vuoto");
         }
