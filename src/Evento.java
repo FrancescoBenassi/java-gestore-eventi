@@ -19,13 +19,13 @@ public class Evento {
         // }
         LocalDate dateToday = LocalDate.now();
         // this.date = LocalDate.of(year, month, day);
-        this.date = date;
-        if (dateToday.isAfter(this.date)) {
+        if (dateToday.isAfter(date)) {
             throw new IllegalDateIsBeforeException("La data inserita è già passata, riprova");
         }
         if (totalSeats < 1) {
             throw new IllegalNumberSeatsException("Il numero totale di posti è inferiore ad 1, riprova");
         }
+        this.date = date;
         this.title = title;
         this.totalSeats = totalSeats;
         this.reservedSeats = 0;
