@@ -41,7 +41,7 @@ public class ProgrammaEventi {
     public String getTitleAndDate() {
         this.events.sort(Comparator.comparing(event -> event.getDate()));
         // for (Evento event : this.events) {
-        //     System.out.println(event.getDate() + " - " + event.getTitle());
+        // System.out.println(event.getDate() + " - " + event.getTitle());
         // }
         return this.title + this.events;
     }

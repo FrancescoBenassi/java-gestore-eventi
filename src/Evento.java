@@ -14,7 +14,8 @@ public class Evento {
             throw new IllegalWordException("Il titolo inserito è vuoto");
         }
         // if (day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0) {
-        //     throw new IllegalDateException("I valori della data inseriti non sono corretti");
+        // throw new IllegalDateException("I valori della data inseriti non sono
+        // corretti");
         // }
         LocalDate dateToday = LocalDate.now();
         // this.date = LocalDate.of(year, month, day);
@@ -61,7 +62,8 @@ public class Evento {
         return this.reservedSeats;
     }
 
-    public void addReservation(int numberUserBookings) throws IllegalAddReservationException, IllegalDateIsBeforeException{
+    public void addReservation(int numberUserBookings)
+            throws IllegalAddReservationException, IllegalDateIsBeforeException {
         LocalDate dateToday = LocalDate.now();
         if (this.totalSeats - this.reservedSeats < numberUserBookings || numberUserBookings < 0) {
             throw new IllegalAddReservationException(
@@ -76,7 +78,8 @@ public class Evento {
         }
     }
 
-    public void removeReservation(int numberCancelSeatUser) throws IllegalRemoveReservationException, IllegalDateIsBeforeException {
+    public void removeReservation(int numberCancelSeatUser)
+            throws IllegalRemoveReservationException, IllegalDateIsBeforeException {
         LocalDate dateToday = LocalDate.now();
         if (this.reservedSeats - numberCancelSeatUser < 0 || numberCancelSeatUser < 0) {
             throw new IllegalRemoveReservationException(

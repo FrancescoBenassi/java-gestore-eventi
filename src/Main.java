@@ -7,25 +7,20 @@ public class Main {
         Scanner input = new Scanner(System.in);
         System.out.println("Vuoi inserire un nuovo evento? Rispondi con 'true' o 'false'");
         boolean userEvent = Boolean.parseBoolean(input.nextLine());
-        String eventTitle;
-        int dayEvent;
-        int monthEvent;
-        int yearEvent;
-        int totalSeats;
         Evento event;
         if (userEvent) {
             try {
                 System.out.println("Inserisci il titolo dell'evento");
-                eventTitle = input.nextLine();
+                String eventTitle = input.nextLine();
                 System.out.println("Inserisci il giorno dell'evento");
-                dayEvent = Integer.parseInt(input.nextLine());
+                int dayEvent = Integer.parseInt(input.nextLine());
                 System.out.println("Inserisci il mese dell'evento");
-                monthEvent = Integer.parseInt(input.nextLine());
+                int monthEvent = Integer.parseInt(input.nextLine());
                 System.out.println("Inserisci l'anno dell'evento");
-                yearEvent = Integer.parseInt(input.nextLine());
+                int yearEvent = Integer.parseInt(input.nextLine());
                 LocalDate dateEvent = LocalDate.of(yearEvent, monthEvent, dayEvent);
                 System.out.println("Inserisci la quantità di posti a sedere");
-                totalSeats = Integer.parseInt(input.nextLine());
+                int totalSeats = Integer.parseInt(input.nextLine());
                 event = new Evento(eventTitle, dateEvent, totalSeats);
                 System.out.println("Vuoi fare delle prenotazioni? Rispondi con 'true o 'false'");
                 boolean userBookings = Boolean.parseBoolean(input.nextLine());
