@@ -60,6 +60,7 @@ public class Concerto extends Evento {
             LocalTime timeEvent = LocalTime.of(23, 10);
             Concerto concert = new Concerto("Noemi", dateEvent, 200, timeEvent, 50);
             System.out.println(concert.getPrice());
+            concert.addReservation(10);
             System.out.println(concert.getReservedSeats());
             System.out.println(concert.getSeatingAvailable());
             System.out.println(concert.getTitle());
